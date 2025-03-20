@@ -1,0 +1,310 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin-bottom: 10px;
+    font-size: 2.5rem;
+}
+
+.description {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Remove styles for controls which we no longer need */
+.controls {
+    display: none; /* Hide this since we no longer need the chart selector */
+}
+
+select {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    min-width: 250px;
+}
+
+.visualization-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+#chart-area {
+    width: 100%;
+    min-height: 650px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+.chart-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    max-width: 100%;
+    word-wrap: break-word;
+    white-space: normal;
+    text-align: center;
+}
+
+#insights {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #6e8efb;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .visualization-container {
+        padding: 15px;
+    }
+    
+    header {
+        padding: 15px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    #chart-container svg {
+        width: 100%;
+    }
+    
+    .chart-title {
+        font-size: 1.1rem;
+    }
+}
+
+/* Animation for chart transitions */
+.bar, .slice, .dot {
+    transition: opacity 0.3s;
+}
+
+.bar:hover, .slice:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+/* Make the question selector more prominent since it's the only control now */
+.question-selector-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto 30px; /* Auto margins for horizontal centering of container */
+    width: 100%;
+    max-width: 754px;
+    position: relative;
+}
+
+.question-selector-container label {
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: left;
+    width: 100%;
+}
+
+/* Style the select element and its dropdown */
+.question-selector {
+    width: 100%; /* Full width of container */
+    min-width: 250px;
+    max-width: 600px;
+    padding: 12px;
+    font-size: 1.1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    text-align: left;  /* Left-align the text */
+    position: relative;
+    z-index: 10;
+    text-align-last: left; /* Ensure selected text is left-aligned */
+}
+
+/* Style the select element with proper positioning for dropdown centering */
+.question-selector {
+    width: 100%;
+    max-width: 600px;
+    padding: 12px;
+    font-size: 1.1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    text-align: left;  /* Left-align the text */
+    position: relative;
+    z-index: 10;
+}
+
+/* Center the dropdown options */
+.question-selector select,
+.question-selector option {
+    text-align: left !important;
+}
+
+/* Force Firefox to center text in the dropdown */
+@-moz-document url-prefix() {
+    .question-selector {
+        text-align: left;
+    }
+    .question-selector option {
+        text-align: left;
+    }
+}
+
+/* Fix for Chrome and Safari */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .question-selector {
+        text-align-last: left;
+    }
+}
+
+/* Style the select element and its dropdown */
+.question-selector {
+    width: auto;               /* Change from 100% to auto to fit content */
+    min-width: 250px;          /* Set a minimum width */
+    max-width: 600px;          /* Keep a maximum width */
+    padding: 12px;
+    font-size: 1.1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    /* Removed text-align: center */
+}
+
+/* Force select element to be sized by its content */
+.question-selector option {
+    padding: 8px;
+    font-size: 1rem;
+    min-width: auto;
+    white-space: normal;
+    text-align: left;
+}
+
+/* Style for dropdown menu in modern browsers */
+@supports (appearance: none) {
+    .question-selector {
+        appearance: none;      /* Remove default styling */
+        background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        padding-right: 30px;   /* Make room for the dropdown arrow */
+    }
+}
+
+/* Left-align the option text */
+.question-selector option {
+    text-align: left;
+    padding: 8px;
+    font-size: 1rem;
+}
+
+/* Remove any text-align-last properties that center text */
+.question-selector {
+    text-align-last: left; /* Left align the selected text */
+}
+
+/* Browser-specific fixes */
+@-moz-document url-prefix() {
+    .question-selector, 
+    .question-selector option {
+        text-align: left;
+    }
+}
+
+/* Fix for Chrome and Safari */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .question-selector {
+        text-align-last: left;
+    }
+    
+    /* This targets the dropdown in Chrome */
+    select.question-selector option {
+        text-align: left !important;
+    }
+}
+
+#chart-container {
+    width: 100%;
+    min-height: 450px;
+    margin-top: 40px;          /* Increased from 20px */
+    margin-bottom: 50px;       /* Increased from 30px */
+    padding-top: 30px;         /* Added padding to the top */
+    padding-bottom: 60px;      /* Increased from 40px */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Ensure SVG container respects parent dimensions and has enough bottom space */
+#chart-container svg {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;          /* Added margin to the top of the SVG */
+    margin-bottom: 40px;       /* Increased from 20px */
+}
+
+/* Additional space for rotated axis labels */
+.axis-label text {
+    margin-top: 15px;
+}
+
+/* Add more space for axis labels, especially when rotated */
+.axis text {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Ensure SVG container respects parent dimensions */
+#chart-container svg {
+    max-width: 100%;
+    height: auto;
+}
