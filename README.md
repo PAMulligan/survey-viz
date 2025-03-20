@@ -6,6 +6,8 @@
 
 The Survey Insights Dashboard is an interactive data visualization tool designed to transform complex survey data into clear, actionable insights. This application presents survey responses through dynamic, visually engaging charts that help identify patterns, preferences, and trends from respondent feedback.
 
+You can view the page at https://pamulligan.github.io/survey-viz/
+
 ## Project Description
 
 This dashboard was developed to address the challenge of analyzing large volumes of survey data effectively. Rather than sifting through spreadsheets or static reports, users can explore survey results through intuitive visualizations that automatically adapt to highlight the most important aspects of each question's responses.
